@@ -1,0 +1,2726 @@
+{
+	"info": {
+		"_postman_id": "d46259e4-1528-4ee6-9d9e-9cbc479b9dd8",
+		"name": "Marvel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25630273"
+	},
+	"item": [
+		{
+			"name": "e-commerce",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "POST - Auth/Login",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"let token = \"Token \" + jsonData.token;",
+											"let userID = jsonData.user.id;",
+											"let username = jsonData.user.username;",
+											"postman.setEnvironmentVariable(\"TOKEN\", token);",
+											"postman.setEnvironmentVariable(\"USER_ID\", userID);",
+											"postman.setEnvironmentVariable(\"USERNAME\", username);",
+											"console.log(pm.environment.get(\"TOKEN\"));",
+											"console.log(\"user_id:\",pm.environment.get(\"USER_ID\"));",
+											"console.log(\"username:\",pm.environment.get(\"USERNAME\"));",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"robertocarlos\",\n    \"password\": \"hola123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/e-commerce/user/login/",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"user",
+										"login",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "POST - Auth/Login",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"root\",\n    \"password\": {{PASSWORD}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/user/login/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"user",
+												"login",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [],
+									"cookie": [],
+									"body": "{\n    \"user\": {\n        \"id\": 1,\n        \"last_login\": \"2023-01-21T20:45:49.915124Z\",\n        \"is_superuser\": true,\n        \"username\": \"root\",\n        \"first_name\": \"\",\n        \"last_name\": \"\",\n        \"email\": \"\",\n        \"is_staff\": true,\n        \"is_active\": true,\n        \"date_joined\": \"2023-01-21T20:45:37.572526Z\",\n        \"groups\": [],\n        \"user_permissions\": []\n    },\n    \"token\": \"2c9dc08814ad3354bcd924a1ca70edef4032efc5\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Comics",
+					"item": [
+						{
+							"name": "GET - Comics List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/e-commerce/comics/get",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"comics",
+										"get"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GET - Comics List",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/get",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"get"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"marvel_id\": 1590,\n        \"title\": \"Official Handbook of the Marvel Universe (2004) #9 (THE WOMEN OF MARVEL)\",\n        \"description\": \"Marvel's leading ladies take center stage! This Official Handbook includes in-depth bios on more than 40 of the House's most powerful women warriors - from Araña to Vindicator! Plus: an all-new cover by superstar artist Greg Land!\",\n        \"price\": 3.99,\n        \"stock_qty\": 3,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/9/b0/4c7d666c0e58a/standard_xlarge.jpg\"\n    },\n    {\n        \"id\": 2,\n        \"marvel_id\": 1308,\n        \"title\": \"Marvel Age Spider-Man Vol. 2: Everyday Hero (Digest)\",\n        \"description\": \"\",\n        \"price\": 5.99,\n        \"stock_qty\": 4,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/9/20/4bc665483c3aa/standard_xlarge.jpg\"\n    },\n    {\n        \"id\": 3,\n        \"marvel_id\": 22582,\n        \"title\": \"Civil War (Hardcover)\",\n        \"description\": \"The landscape of the Marvel Universe is changing, and it's time to choose: Whose side are you on? A conflict has been brewing from more than a year, threatening to pit friend against friend, brother against brother - and all it will take is a single misstep to cost thousands their lives and ignite the fuse! As the war claims its first victims, no one is safe as teams, friendships and families begin to fall apart. The crossover that rewrites the rules, Civil War stars Spider-Man, the New Avengers, the Fantastic Four, the X-Men and the entirety of the Marvel pantheon! Collecting CIVIL WAR #1-7, MARVEL SPOTLIGHT: CIVIL WAR and CIVIL WAR SCRIPT BOOK.<br>Rated T+ ...$39.99<br>ISBN: 978-0-7851-2178-7<br>Trim size: oversized<br>\",\n        \"price\": 39.99,\n        \"stock_qty\": 3,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/8/c0/51dda501724ed/standard_xlarge.jpg\"\n    },\n    {\n        \"id\": 4,\n        \"marvel_id\": 1886,\n        \"title\": \"Official Handbook of the Marvel Universe (2004) #12 (SPIDER-MAN)\",\n        \"description\": \"The spectacular sequel to last year's OFFICIAL HANDBOOK OF THE MARVEL UNIVERSE: SPIDER-MAN 2004, this Official Handbook contains in-depth bios on more than 30 of the wisecracking web-slinger's closest allies and most infamous enemies - including the Stacy Twins, fresh from the pages of AMAZING SPIDER-MAN, and Toxin, in time for this month's TOXIN #1! Plus: An all-new cover by superstar artist Tom Raney, digitally painted by Morry Hollowell.<br>48 PGS./Marvel PSR ...$3.99<br>\",\n        \"price\": 3.99,\n        \"stock_qty\": 5,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/b/40/4bc64020a4ccc/standard_xlarge.jpg\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "GET - Only One Comic (id)",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/e-commerce/comics/{{COMIC_ID}}/get",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"comics",
+										"{{COMIC_ID}}",
+										"get"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GET - Only One Comic (id)",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/{{COMIC_ID}}/get",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"{{COMIC_ID}}",
+												"get"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 1,\n    \"marvel_id\": 1590,\n    \"title\": \"Official Handbook of the Marvel Universe (2004) #9 (THE WOMEN OF MARVEL)\",\n    \"description\": \"Marvel's leading ladies take center stage! This Official Handbook includes in-depth bios on more than 40 of the House's most powerful women warriors - from Araña to Vindicator! Plus: an all-new cover by superstar artist Greg Land!\",\n    \"price\": 3.99,\n    \"stock_qty\": 3,\n    \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/9/b0/4c7d666c0e58a/standard_xlarge.jpg\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GET - Only One Comic (marvel_id)",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/e-commerce/comics/marvel/{{MARVEL_ID}}/get",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"comics",
+										"marvel",
+										"{{MARVEL_ID}}",
+										"get"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GET - Only One Comic (marvel_id)",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/marvel/{{MARVEL_ID}}/get",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"marvel",
+												"{{MARVEL_ID}}",
+												"get"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 2,\n    \"marvel_id\": 1308,\n    \"title\": \"Marvel Age Spider-Man Vol. 2: Everyday Hero (Digest)\",\n    \"description\": \"\",\n    \"price\": 5.99,\n    \"stock_qty\": 4,\n    \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/9/20/4bc665483c3aa/standard_xlarge.jpg\"\n}"
+								}
+							]
+						},
+						{
+							"name": "POST - Comic",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"marvel_id\": 1111111,\n    \"title\": \"Título del Comic\",\n    \"description\": \"Descripción del Comic\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/e-commerce/comics/post",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"comics",
+										"post"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "POST - Comic",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"marvel_id\": 1111111,\n    \"title\": \"Título del Comic\",\n    \"description\": \"Descripción del Comic\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/post",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"post"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 7,\n    \"marvel_id\": 1111111,\n    \"title\": \"Título del Comic\",\n    \"description\": \"Descripción del Comic\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GET / PUT - GET / Update Comic",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"marvel_id\": 1,\n    \"title\": \"Título del Comic a cambiar\",\n    \"description\": \"Descripción del Comic a cambiar\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/e-commerce/comics/{{COMIC_ID}}/get-update",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"comics",
+										"{{COMIC_ID}}",
+										"get-update"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "PUT - Update Comic",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"marvel_id\": 1,\n    \"title\": \"Título del Comic a cambiar\",\n    \"description\": \"Descripción del Comic a cambiar\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/{{COMIC_ID}}/get-update",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"{{COMIC_ID}}",
+												"get-update"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 5,\n    \"marvel_id\": 1,\n    \"title\": \"Título del Comic a cambiar\",\n    \"description\": \"Descripción del Comic a cambiar\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n}"
+								},
+								{
+									"name": "GET - Comic",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/{{COMIC_ID}}/get-update",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"{{COMIC_ID}}",
+												"get-update"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [],
+									"cookie": [],
+									"body": "{\n    \"id\": 1,\n    \"marvel_id\": 1590,\n    \"title\": \"Official Handbook of the Marvel Universe (2004) #9 (THE WOMEN OF MARVEL)\",\n    \"description\": \"Marvel's leading ladies take center stage! This Official Handbook includes in-depth bios on more than 40 of the House's most powerful women warriors - from Araña to Vindicator! Plus: an all-new cover by superstar artist Greg Land!\",\n    \"price\": 3.99,\n    \"stock_qty\": 3,\n    \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/9/b0/4c7d666c0e58a/standard_xlarge.jpg\"\n}"
+								}
+							]
+						},
+						{
+							"name": "DELETE - Comic",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/e-commerce/comics/{{COMIC_ID}}/delete",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"comics",
+										"{{COMIC_ID}}",
+										"delete"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DELETE - Comic",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/{{COMIC_ID}}/delete",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"{{COMIC_ID}}",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GET / POST - GET / Create Comic",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"marvel_id\": 1111111,\n    \"title\": \"Título del Comic\",\n    \"description\": \"Descripción del Comic\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/e-commerce/comics/get-post",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"comics",
+										"get-post"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GET - Comics List",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/get-post",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"get-post"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 2,\n        \"marvel_id\": 1308,\n        \"title\": \"Marvel Age Spider-Man Vol. 2: Everyday Hero (Digest)\",\n        \"description\": \"\",\n        \"price\": 5.99,\n        \"stock_qty\": 4,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/9/20/4bc665483c3aa/standard_xlarge.jpg\"\n    },\n    {\n        \"id\": 1,\n        \"marvel_id\": 1590,\n        \"title\": \"Official Handbook of the Marvel Universe (2004) #9 (THE WOMEN OF MARVEL)\",\n        \"description\": \"Marvel's leading ladies take center stage! This Official Handbook includes in-depth bios on more than 40 of the House's most powerful women warriors - from Araña to Vindicator! Plus: an all-new cover by superstar artist Greg Land!\",\n        \"price\": 3.99,\n        \"stock_qty\": 3,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/9/b0/4c7d666c0e58a/standard_xlarge.jpg\"\n    },\n    {\n        \"id\": 4,\n        \"marvel_id\": 1886,\n        \"title\": \"Official Handbook of the Marvel Universe (2004) #12 (SPIDER-MAN)\",\n        \"description\": \"The spectacular sequel to last year's OFFICIAL HANDBOOK OF THE MARVEL UNIVERSE: SPIDER-MAN 2004, this Official Handbook contains in-depth bios on more than 30 of the wisecracking web-slinger's closest allies and most infamous enemies - including the Stacy Twins, fresh from the pages of AMAZING SPIDER-MAN, and Toxin, in time for this month's TOXIN #1! Plus: An all-new cover by superstar artist Tom Raney, digitally painted by Morry Hollowell.<br>48 PGS./Marvel PSR ...$3.99<br>\",\n        \"price\": 3.99,\n        \"stock_qty\": 5,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/b/40/4bc64020a4ccc/standard_xlarge.jpg\"\n    },\n    {\n        \"id\": 3,\n        \"marvel_id\": 22582,\n        \"title\": \"Civil War (Hardcover)\",\n        \"description\": \"The landscape of the Marvel Universe is changing, and it's time to choose: Whose side are you on? A conflict has been brewing from more than a year, threatening to pit friend against friend, brother against brother - and all it will take is a single misstep to cost thousands their lives and ignite the fuse! As the war claims its first victims, no one is safe as teams, friendships and families begin to fall apart. The crossover that rewrites the rules, Civil War stars Spider-Man, the New Avengers, the Fantastic Four, the X-Men and the entirety of the Marvel pantheon! Collecting CIVIL WAR #1-7, MARVEL SPOTLIGHT: CIVIL WAR and CIVIL WAR SCRIPT BOOK.<br>Rated T+ ...$39.99<br>ISBN: 978-0-7851-2178-7<br>Trim size: oversized<br>\",\n        \"price\": 39.99,\n        \"stock_qty\": 3,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/8/c0/51dda501724ed/standard_xlarge.jpg\"\n    },\n    {\n        \"id\": 7,\n        \"marvel_id\": 1111111,\n        \"title\": \"Título del Comic\",\n        \"description\": \"Descripción del Comic\",\n        \"price\": 0,\n        \"stock_qty\": 0,\n        \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n    }\n]"
+								},
+								{
+									"name": "POST - Create Comic",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"marvel_id\": 1111111,\n    \"title\": \"Título del Comic\",\n    \"description\": \"Descripción del Comic\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/get-post",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"get-post"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 7,\n    \"marvel_id\": 1111111,\n    \"title\": \"Título del Comic\",\n    \"description\": \"Descripción del Comic\",\n    \"price\": 0,\n    \"stock_qty\": 0,\n    \"picture\": \"https://www.django-rest-framework.org/img/logo.png\"\n}"
+								}
+							]
+						},
+						{
+							"name": "PUT - Update Comic by update method",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Título a actualizar\",\n    \"description\": \"Descripción a actualizar\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": {{URL}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/e-commerce/comics/{{MARVEL_ID}}/update",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"comics",
+										"{{MARVEL_ID}}",
+										"update"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "PUT - Update Comic by update method",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"Título a actualizar\",\n    \"description\": \"Descripción a actualizar\",\n    \"price\": 0.0,\n    \"stock_qty\": 0,\n    \"picture\": {{URL}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/{{MARVEL_ID}}/update",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"{{MARVEL_ID}}",
+												"update"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"marvel_id\": 1003,\n    \"title\": \"Sentry, the (Trade Paperback)\",\n    \"description\": \"On the edge of alcoholism and a failed marriage, Bob Reynolds wakes up to discover his true nature. A forgotten hero, he must unravel the conspiracy to erase his memory from mankind before an evil entity returns.\",\n    \"price\": 9.99,\n    \"stock_qty\": 20,\n    \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/f/c0/4bc66d78f1bee/standard_xlarge.jpg\"\n}"
+								}
+							]
+						},
+						{
+							"name": "PATCH - Update Comic by patch method",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Título a actualizar\",\n    \"description\": \"Descripción a actualizar\",\n    \"price\": 0.0,\n    \"stock_qty\": 20,\n    \"picture\": {{URL}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/e-commerce/comics/{{MARVEL_ID}}/update",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"comics",
+										"{{MARVEL_ID}}",
+										"update"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "PATCH - Update Comic by patch method",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"Título a actualizar\",\n    \"description\": \"Descripción a actualizar\",\n    \"price\": 0.0,\n    \"stock_qty\": 20,\n    \"picture\": {{URL}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/comics/{{MARVEL_ID}}/update",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"comics",
+												"{{MARVEL_ID}}",
+												"update"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"marvel_id\": 1003,\n    \"title\": \"Sentry, the (Trade Paperback)\",\n    \"description\": \"On the edge of alcoholism and a failed marriage, Bob Reynolds wakes up to discover his true nature. A forgotten hero, he must unravel the conspiracy to erase his memory from mankind before an evil entity returns.\",\n    \"price\": 9.99,\n    \"stock_qty\": 20,\n    \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/f/c0/4bc66d78f1bee/standard_xlarge.jpg\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "WishList",
+					"item": [
+						{
+							"name": "GET - Wish List all",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/e-commerce/wish/get",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"wish",
+										"get"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GET - Wish List all",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										]
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"user\": 2,\n        \"favorite\": true,\n        \"cart\": false,\n        \"wished_qty\": 2,\n        \"bought_qty\": 1\n    },\n    {\n        \"id\": 2,\n        \"user\": 1,\n        \"favorite\": true,\n        \"cart\": true,\n        \"wished_qty\": 2,\n        \"bought_qty\": 1\n    },\n    {\n        \"id\": 3,\n        \"user\": 2,\n        \"favorite\": true,\n        \"cart\": true,\n        \"wished_qty\": 2,\n        \"bought_qty\": 1\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "POST - Wish List",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": {{USER_ID}},\n    \"comic\": {{COMIC_ID}},\n    \"favorite\": false,\n    \"cart\": false,\n    \"wished_qty\": 0,\n    \"bought_qty\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/e-commerce/wish/post",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"wish",
+										"post"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "POST - Wish List",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"user\": {{USER_ID}},\n    \"comic\": {{COMIC_ID}},\n    \"favorite\": false,\n    \"cart\": false,\n    \"wished_qty\": 0,\n    \"bought_qty\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/wish/post",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"wish",
+												"post"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 4,\n    \"user\": 2,\n    \"favorite\": false,\n    \"cart\": false,\n    \"wished_qty\": 0,\n    \"bought_qty\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "PUT - Partial Update WishList by method update",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"favorite\": false,\n    \"cart\": false,\n    \"wished_qty\": 0,\n    \"bought_qty\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/e-commerce/wish/{{COMIC_ID}}/update",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"wish",
+										"{{COMIC_ID}}",
+										"update"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "PUT - Partial Update WishList by method update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"favorite\": false,\n    \"cart\": false,\n    \"wished_qty\": 0,\n    \"bought_qty\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/wish/{{COMIC_ID}}/update",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"wish",
+												"{{COMIC_ID}}",
+												"update"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 4,\n    \"user\": 2,\n    \"favorite\": false,\n    \"cart\": false,\n    \"wished_qty\": 0,\n    \"bought_qty\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "PATCH - Partial Update WishList by method patch",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"favorite\": false,\n    \"cart\": false,\n    \"wished_qty\": 0,\n    \"bought_qty\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/e-commerce/wish/{{COMIC_ID}}/update",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"wish",
+										"{{COMIC_ID}}",
+										"update"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "PATCH - Partial Update WishList by method patch",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"favorite\": false,\n    \"cart\": false,\n    \"wished_qty\": 0,\n    \"bought_qty\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/wish/{{COMIC_ID}}/update",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"wish",
+												"{{COMIC_ID}}",
+												"update"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 1,\n    \"user\": 2,\n    \"favorite\": true,\n    \"cart\": false,\n    \"wished_qty\": 2,\n    \"bought_qty\": 1\n}"
+								}
+							]
+						},
+						{
+							"name": "DELETE - WishList",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/e-commerce/wish/{{COMIC_ID}}/delete",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"wish",
+										"{{COMIC_ID}}",
+										"delete"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "DELETE - WishList",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URL}}/e-commerce/wish/{{COMIC_ID}}/delete",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"wish",
+												"{{COMIC_ID}}",
+												"delete"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GET - Favorite List by user",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/e-commerce/favs/{{USERNAME}}/get",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"favs",
+										"{{USERNAME}}",
+										"get"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GET - Favorite List by user",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URL}}/e-commerce/favs/{{USERNAME}}/get",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"favs",
+												"{{USERNAME}}",
+												"get"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"marvel_id\": 183,\n        \"title\": \"Startling Stories: The Incorrigible Hulk (2004) #1\",\n        \"description\": \"For Doctor Bruce Banner life is anything but normal. But what happens when two women get between him and his alter ego, the Incorrigible Hulk? Hulk confused! Indy superstar Peter Bagge (THE MEGALOMANIACAL SPIDER-MAN) takes a satirical jab at the Hulk mythos with a tale of dames, debauchery and destruction.32 PGS./MARVEL PSR...$2.99\",\n        \"price\": 2.99,\n        \"stock_qty\": 8,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/standard_xlarge.jpg\"\n    },\n    {\n        \"marvel_id\": 1003,\n        \"title\": \"Sentry, the (Trade Paperback)\",\n        \"description\": \"On the edge of alcoholism and a failed marriage, Bob Reynolds wakes up to discover his true nature. A forgotten hero, he must unravel the conspiracy to erase his memory from mankind before an evil entity returns.\",\n        \"price\": 9.99,\n        \"stock_qty\": 20,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/f/c0/4bc66d78f1bee/standard_xlarge.jpg\"\n    },\n    {\n        \"marvel_id\": 1308,\n        \"title\": \"Marvel Age Spider-Man Vol. 2: Everyday Hero (Digest)\",\n        \"description\": \"\",\n        \"price\": 5.99,\n        \"stock_qty\": 4,\n        \"picture\": \"http://i.annihil.us/u/prod/marvel/i/mg/9/20/4bc665483c3aa/standard_xlarge.jpg\"\n    }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "ViewSets",
+					"item": [
+						{
+							"name": "ViewSet",
+							"item": [
+								{
+									"name": "GET - ViewSet - LIst Users",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/viewset/users/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"viewset",
+												"users",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "GET - ViewSet - LIst Users",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													},
+													{
+														"key": "",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/viewset/users/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"viewset",
+														"users",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "[\n    {\n        \"id\": 3,\n        \"last_login\": null,\n        \"is_superuser\": false,\n        \"username\": \"boca_juniors\",\n        \"first_name\": \"Boca\",\n        \"last_name\": \"juniors\",\n        \"email\": \"bocaaaa@gmail.com\",\n        \"is_staff\": false,\n        \"date_joined\": \"2022-09-16T00:34:36Z\"\n    },\n    {\n        \"id\": 4,\n        \"last_login\": null,\n        \"is_superuser\": false,\n        \"username\": \"river_plate\",\n        \"first_name\": \"river\",\n        \"last_name\": \"plateee\",\n        \"email\": \"rp@gmail.com\",\n        \"is_staff\": false,\n        \"date_joined\": \"2022-09-16T00:35:17Z\"\n    },\n    {\n        \"id\": 1,\n        \"last_login\": \"2023-02-13T15:10:37.502917Z\",\n        \"is_superuser\": true,\n        \"username\": \"root\",\n        \"first_name\": \"\",\n        \"last_name\": \"\",\n        \"email\": \"emmaotm@gmail.com\",\n        \"is_staff\": true,\n        \"date_joined\": \"2022-09-16T00:28:02.811193Z\"\n    },\n    {\n        \"id\": 2,\n        \"last_login\": null,\n        \"is_superuser\": false,\n        \"username\": \"robertocarlos\",\n        \"first_name\": \"Roberto\",\n        \"last_name\": \"Carlos\",\n        \"email\": \"robertocarlos@gmail.com\",\n        \"is_staff\": true,\n        \"date_joined\": \"2022-09-16T00:33:35Z\"\n    }\n]"
+										}
+									]
+								},
+								{
+									"name": "POST - ViewSet - Create User",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"is_superuser\": false,\n    \"username\": {{USERNAME}},\n    \"password\": \"{{PASSWORD}}\",\n    \"first_name\": \"Nombre\",\n    \"last_name\": \"Apellido\",\n    \"email\": \"email@gmail.com\",\n    \"is_staff\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/viewset/users/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"viewset",
+												"users",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "POST - ViewSet - Create User",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"is_superuser\": false,\n    \"username\": {{USERNAME}},\n    \"password\": \"{{PASSWORD}}\",\n    \"first_name\": \"Nombre\",\n    \"last_name\": \"Apellido\",\n    \"email\": \"email@gmail.com\",\n    \"is_staff\": false\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/viewset/users/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"viewset",
+														"users",
+														""
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": 6,\n    \"last_login\": null,\n    \"is_superuser\": false,\n    \"username\": \"josepirulo\",\n    \"first_name\": \"José\",\n    \"last_name\": \"Pirulo\",\n    \"email\": \"josepirulo@gmail.com\",\n    \"is_staff\": false,\n    \"date_joined\": \"2023-02-18T18:43:38.254781Z\"\n}"
+										}
+									]
+								},
+								{
+									"name": "PUT - ViewSet - Update User",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"is_superuser\": false,\n    \"username\": \"josepirulo\",\n    \"password\": \"123456hola\",\n    \"first_name\": \"José\",\n    \"last_name\": \"Pirulito\",\n    \"email\": \"josepirulito@gmail.com\",\n    \"is_staff\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/viewset/users/{{USER_ID}}/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"viewset",
+												"users",
+												"{{USER_ID}}",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "PUT - ViewSet - Update User",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"is_superuser\": false,\n    \"username\": {{USERNAME}},\n    \"password\": \"{{PASSWORD}}\",\n    \"first_name\": \"Nombre\",\n    \"last_name\": \"Apellido\",\n    \"email\": \"email@gmail.com\",\n    \"is_staff\": false\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/viewset/users/{{USER_ID}}/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"viewset",
+														"users",
+														"{{USER_ID}}",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": 6,\n    \"last_login\": null,\n    \"is_superuser\": false,\n    \"username\": \"josepirulo\",\n    \"first_name\": \"José\",\n    \"last_name\": \"Pirulito\",\n    \"email\": \"josepirulito@gmail.com\",\n    \"is_staff\": false,\n    \"date_joined\": \"2023-02-18T18:43:38.254781Z\"\n}"
+										}
+									]
+								},
+								{
+									"name": "GET - ViewSet - Only User",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/viewset/users/{{USER_ID}}/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"viewset",
+												"users",
+												"{{USER_ID}}",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "GET - ViewSet - Only User",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/viewset/users/{{USER_ID}}/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"viewset",
+														"users",
+														"{{USER_ID}}",
+														""
+													],
+													"query": [
+														{
+															"key": "",
+															"value": null,
+															"disabled": true
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": 6,\n    \"last_login\": null,\n    \"is_superuser\": false,\n    \"username\": \"josepirulo\",\n    \"first_name\": \"José\",\n    \"last_name\": \"Pirulito\",\n    \"email\": \"josepirulito@gmail.com\",\n    \"is_staff\": false,\n    \"date_joined\": \"2023-02-18T18:43:38.254781Z\"\n}"
+										}
+									]
+								},
+								{
+									"name": "DELETE - ViewSet - Only User",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/viewset/users/{{USER_ID}}/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"viewset",
+												"users",
+												"{{USER_ID}}",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "DELETE - ViewSet - Only User",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/viewset/users/{{USER_ID}}/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"viewset",
+														"users",
+														"{{USER_ID}}",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"the user was deleted successfully\"\n}"
+										}
+									]
+								},
+								{
+									"name": "PUT - ViewSet - Change User's Password",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": {{USERNAME}},\n    \"current_password\": {{PASSWORD}},\n    \"new_password\": \"{{NEW_PASSWORD}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/viewset/users/{{USER_ID}}/change-password/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"viewset",
+												"users",
+												"{{USER_ID}}",
+												"change-password",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "PUT - ViewSet - Change User's Password",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"username\": {{USERNAME}},\n    \"current_password\": {{PASSWORD}},\n    \"new_password\": \"{{NEW_PASSWORD}}\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/viewset/users/{{USER_ID}}/change-password/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"viewset",
+														"users",
+														"{{USER_ID}}",
+														"change-password",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": 1,\n    \"last_login\": \"2023-02-13T15:10:37.502917Z\",\n    \"is_superuser\": true,\n    \"username\": \"root\",\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"email\": \"emmaotm@gmail.com\",\n    \"is_staff\": true,\n    \"date_joined\": \"2022-09-16T00:28:02.811193Z\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ModelViewSet",
+							"item": [
+								{
+									"name": "Filtering-Backend",
+									"item": [
+										{
+											"name": "GET - User List with Filtering",
+											"request": {
+												"auth": {
+													"type": "apikey",
+													"apikey": [
+														{
+															"key": "value",
+															"value": "{{TOKEN}}",
+															"type": "string"
+														},
+														{
+															"key": "key",
+															"value": "{{AUTHORIZATION}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/modelviewset/filtering-backend/users/?limit=0&offset=0&search=&id=&username&email&is_staff=",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"modelviewset",
+														"filtering-backend",
+														"users",
+														""
+													],
+													"query": [
+														{
+															"key": "limit",
+															"value": "0"
+														},
+														{
+															"key": "offset",
+															"value": "0"
+														},
+														{
+															"key": "search",
+															"value": ""
+														},
+														{
+															"key": "id",
+															"value": ""
+														},
+														{
+															"key": "username",
+															"value": null
+														},
+														{
+															"key": "email",
+															"value": null
+														},
+														{
+															"key": "is_staff",
+															"value": ""
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "GET - User List with Filtering",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Authorization",
+																"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+																"type": "text"
+															}
+														],
+														"url": {
+															"raw": "{{URL}}/e-commerce/api/modelviewset/filtering-backend/users/?limit=0&offset=0&search=&id=&username&email&is_staff=",
+															"host": [
+																"{{URL}}"
+															],
+															"path": [
+																"e-commerce",
+																"api",
+																"modelviewset",
+																"filtering-backend",
+																"users",
+																""
+															],
+															"query": [
+																{
+																	"key": "limit",
+																	"value": "0"
+																},
+																{
+																	"key": "offset",
+																	"value": "0"
+																},
+																{
+																	"key": "search",
+																	"value": ""
+																},
+																{
+																	"key": "id",
+																	"value": ""
+																},
+																{
+																	"key": "username",
+																	"value": null
+																},
+																{
+																	"key": "email",
+																	"value": null
+																},
+																{
+																	"key": "is_staff",
+																	"value": ""
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"description": "",
+															"type": "text"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"count\": 7,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 1,\n            \"last_login\": \"2023-03-06T23:07:19.012661Z\",\n            \"is_superuser\": true,\n            \"username\": \"root\",\n            \"first_name\": \"\",\n            \"last_name\": \"\",\n            \"email\": \"emmaotm@gmail.com\",\n            \"is_staff\": true,\n            \"date_joined\": \"2022-09-16T00:28:02.811193Z\"\n        },\n        {\n            \"id\": 2,\n            \"last_login\": null,\n            \"is_superuser\": false,\n            \"username\": \"robertocarlos\",\n            \"first_name\": \"Roberto\",\n            \"last_name\": \"Carlos\",\n            \"email\": \"robertocarlos@gmail.com\",\n            \"is_staff\": true,\n            \"date_joined\": \"2022-09-16T00:33:35Z\"\n        },\n        {\n            \"id\": 3,\n            \"last_login\": null,\n            \"is_superuser\": false,\n            \"username\": \"boca_juniors\",\n            \"first_name\": \"Boca\",\n            \"last_name\": \"juniors\",\n            \"email\": \"bocaaaa@gmail.com\",\n            \"is_staff\": false,\n            \"date_joined\": \"2022-09-16T00:34:36Z\"\n        },\n        {\n            \"id\": 4,\n            \"last_login\": null,\n            \"is_superuser\": false,\n            \"username\": \"river_plate\",\n            \"first_name\": \"river\",\n            \"last_name\": \"plateee\",\n            \"email\": \"rp@gmail.com\",\n            \"is_staff\": false,\n            \"date_joined\": \"2022-09-16T00:35:17Z\"\n        },\n        {\n            \"id\": 5,\n            \"last_login\": null,\n            \"is_superuser\": false,\n            \"username\": \"adelapipin\",\n            \"first_name\": \"Adela\",\n            \"last_name\": \"Pipin\",\n            \"email\": \"adelapipin@gmail.com\",\n            \"is_staff\": false,\n            \"date_joined\": \"2023-02-18T18:39:09.577841Z\"\n        },\n        {\n            \"id\": 7,\n            \"last_login\": null,\n            \"is_superuser\": false,\n            \"username\": \"pruebainove\",\n            \"first_name\": \"Prueba\",\n            \"last_name\": \"Inove\",\n            \"email\": \"pruebainove@gmail.com\",\n            \"is_staff\": false,\n            \"date_joined\": \"2023-03-06T23:29:54.853502Z\"\n        },\n        {\n            \"id\": 8,\n            \"last_login\": null,\n            \"is_superuser\": true,\n            \"username\": \"pruebainove777\",\n            \"first_name\": \"PruebaInove\",\n            \"last_name\": \"2\",\n            \"email\": \"pruebainove@gmail.com\",\n            \"is_staff\": true,\n            \"date_joined\": \"2023-03-06T23:33:57.501437Z\"\n        }\n    ]\n}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "GET - Users List",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/modelviewset/users/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"modelviewset",
+												"users",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "GET - Users List",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/modelviewset/users/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"modelviewset",
+														"users",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"count\": 5,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 3,\n            \"last_login\": null,\n            \"is_superuser\": false,\n            \"username\": \"boca_juniors\",\n            \"first_name\": \"Boca\",\n            \"last_name\": \"juniors\",\n            \"email\": \"bocaaaa@gmail.com\",\n            \"is_staff\": false,\n            \"date_joined\": \"2022-09-16T00:34:36Z\"\n        },\n        {\n            \"id\": 4,\n            \"last_login\": null,\n            \"is_superuser\": false,\n            \"username\": \"river_plate\",\n            \"first_name\": \"river\",\n            \"last_name\": \"plateee\",\n            \"email\": \"rp@gmail.com\",\n            \"is_staff\": false,\n            \"date_joined\": \"2022-09-16T00:35:17Z\"\n        },\n        {\n            \"id\": 2,\n            \"last_login\": null,\n            \"is_superuser\": false,\n            \"username\": \"robertocarlos\",\n            \"first_name\": \"Roberto\",\n            \"last_name\": \"Carlos\",\n            \"email\": \"robertocarlos@gmail.com\",\n            \"is_staff\": true,\n            \"date_joined\": \"2022-09-16T00:33:35Z\"\n        },\n        {\n            \"id\": 5,\n            \"last_login\": null,\n            \"is_superuser\": false,\n            \"username\": \"adelapipin\",\n            \"first_name\": \"Adela\",\n            \"last_name\": \"Pipin\",\n            \"email\": \"adelapipin@gmail.com\",\n            \"is_staff\": false,\n            \"date_joined\": \"2023-02-18T18:39:09.577841Z\"\n        },\n        {\n            \"id\": 1,\n            \"last_login\": \"2023-03-06T23:07:19.012661Z\",\n            \"is_superuser\": true,\n            \"username\": \"root\",\n            \"first_name\": \"\",\n            \"last_name\": \"\",\n            \"email\": \"emmaotm@gmail.com\",\n            \"is_staff\": true,\n            \"date_joined\": \"2022-09-16T00:28:02.811193Z\"\n        }\n    ]\n}"
+										}
+									]
+								},
+								{
+									"name": "POST - User Create",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": {{PASSWORD}},\n    \"is_superuser\": false,\n    \"username\": {{USERNAME}},\n    \"first_name\": \"Nombre del Usuario\",\n    \"last_name\": \"Apellido del Usuario\",\n    \"email\": \"{{EMAIL}}\",\n    \"is_staff\": false,\n    \"is_active\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/modelviewset/users/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"modelviewset",
+												"users",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "POST - User Create",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"password\": {{PASSWORD}},\n    \"is_superuser\": false,\n    \"username\": {{USERNAME}},\n    \"first_name\": \"Nombre del Usuario\",\n    \"last_name\": \"Apellido del Usuario\",\n    \"email\": \"{{EMAIL}}\",\n    \"is_staff\": false,\n    \"is_active\": false\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/modelviewset/users/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"modelviewset",
+														"users",
+														""
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": 7,\n    \"last_login\": null,\n    \"is_superuser\": false,\n    \"username\": {{{USERNAME}},\n    \"first_name\": \"Nombre del Usuario\",\n    \"last_name\": \"Apellido del Usuario\",\n    \"email\": {{EMAIL}},\n    \"is_staff\": false,\n    \"date_joined\": \"2023-03-06T23:29:54.853502Z\"\n}"
+										}
+									]
+								},
+								{
+									"name": "PUT -  User Update",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"is_superuser\": true,\n    \"username\": {{USERNAME}},\n    \"password\": {{PASSWORD}},\n    \"first_name\": \"Nombre del Usuario\",\n    \"last_name\": \"Apellido del Nombre\",\n    \"email\": {{EMAIL}},\n    \"is_staff\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/modelviewset/users/{{USER_ID}}/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"modelviewset",
+												"users",
+												"{{USER_ID}}",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "PUT -  User Update",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"is_superuser\": true,\n    \"username\": {{USERNAME}},\n    \"password\": {{PASSWORD}},\n    \"first_name\": \"Nombre del Usuario\",\n    \"last_name\": \"Apellido del Nombre\",\n    \"email\": {{EMAIL}},\n    \"is_staff\": true\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/modelviewset/users/{{USER_ID}}/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"modelviewset",
+														"users",
+														"{{USER_ID}}",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": 8,\n    \"last_login\": null,\n    \"is_superuser\": true,\n    \"username\": {{USERNAME}},\n    \"first_name\": \"Nombre del Usuario\",\n    \"last_name\": \"Apellido del Nombre\",\n    \"email\": {{EMAIL}},\n    \"is_staff\": true,\n    \"date_joined\": \"2023-03-06T23:33:57.501437Z\"\n}"
+										}
+									]
+								},
+								{
+									"name": "GET - User Detail",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/modelviewset/users/{{USER_ID}}/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"modelviewset",
+												"users",
+												"{{USER_ID}}",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "GET - User Detail",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/modelviewset/users/{{USER_ID}}/",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"modelviewset",
+														"users",
+														"{{USER_ID}}",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": 8,\n    \"last_login\": null,\n    \"is_superuser\": true,\n    \"username\": {{USERNAME}},\n    \"first_name\": \"Nombre del Usuario\",\n    \"last_name\": \"Apellido del Nombre\",\n    \"email\": {{EMAIL}},\n    \"is_staff\": true,\n    \"date_joined\": \"2023-03-06T23:33:57.501437Z\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "GenericViewSet",
+							"item": [
+								{
+									"name": "GET - User list",
+									"request": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "{{TOKEN}}",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "{{AUTHORIZATION}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/genericviewset/users/?page&search&ordering&pk&is_staff",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												"genericviewset",
+												"users",
+												""
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": null
+												},
+												{
+													"key": "search",
+													"value": null
+												},
+												{
+													"key": "ordering",
+													"value": null
+												},
+												{
+													"key": "pk",
+													"value": null
+												},
+												{
+													"key": "is_staff",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "GET - User list",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{URL}}/e-commerce/api/genericviewset/users/?page&search&ordering&pk&is_staff",
+													"host": [
+														"{{URL}}"
+													],
+													"path": [
+														"e-commerce",
+														"api",
+														"genericviewset",
+														"users",
+														""
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": null
+														},
+														{
+															"key": "search",
+															"value": null
+														},
+														{
+															"key": "ordering",
+															"value": null
+														},
+														{
+															"key": "pk",
+															"value": null
+														},
+														{
+															"key": "is_staff",
+															"value": null
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "[\n    {\n        \"id\": 3,\n        \"last_login\": null,\n        \"is_superuser\": false,\n        \"username\": \"boca_juniors\",\n        \"first_name\": \"Boca\",\n        \"last_name\": \"juniors\",\n        \"email\": \"bocaaaa@gmail.com\",\n        \"is_staff\": false,\n        \"date_joined\": \"2022-09-16T00:34:36Z\"\n    },\n    {\n        \"id\": 4,\n        \"last_login\": null,\n        \"is_superuser\": false,\n        \"username\": \"river_plate\",\n        \"first_name\": \"river\",\n        \"last_name\": \"plateee\",\n        \"email\": \"rp@gmail.com\",\n        \"is_staff\": false,\n        \"date_joined\": \"2022-09-16T00:35:17Z\"\n    },\n    {\n        \"id\": 2,\n        \"last_login\": null,\n        \"is_superuser\": false,\n        \"username\": \"robertocarlos\",\n        \"first_name\": \"Roberto\",\n        \"last_name\": \"Carlos\",\n        \"email\": \"robertocarlos@gmail.com\",\n        \"is_staff\": true,\n        \"date_joined\": \"2022-09-16T00:33:35Z\"\n    },\n    {\n        \"id\": 5,\n        \"last_login\": null,\n        \"is_superuser\": false,\n        \"username\": \"adelapipin\",\n        \"first_name\": \"Adela\",\n        \"last_name\": \"Pipin\",\n        \"email\": \"adelapipin@gmail.com\",\n        \"is_staff\": false,\n        \"date_joined\": \"2023-02-18T18:39:09.577841Z\"\n    },\n    {\n        \"id\": 1,\n        \"last_login\": \"2023-03-06T23:07:19.012661Z\",\n        \"is_superuser\": true,\n        \"username\": \"root\",\n        \"first_name\": \"\",\n        \"last_name\": \"\",\n        \"email\": \"emmaotm@gmail.com\",\n        \"is_staff\": true,\n        \"date_joined\": \"2022-09-16T00:28:02.811193Z\"\n    },\n    {\n        \"id\": 7,\n        \"last_login\": null,\n        \"is_superuser\": false,\n        \"username\": \"pruebainove\",\n        \"first_name\": \"Prueba\",\n        \"last_name\": \"Inove\",\n        \"email\": \"pruebainove@gmail.com\",\n        \"is_staff\": false,\n        \"date_joined\": \"2023-03-06T23:29:54.853502Z\"\n    },\n    {\n        \"id\": 8,\n        \"last_login\": null,\n        \"is_superuser\": true,\n        \"username\": \"pruebainove777\",\n        \"first_name\": \"PruebaInove\",\n        \"last_name\": \"2\",\n        \"email\": \"pruebainove@gmail.com\",\n        \"is_staff\": true,\n        \"date_joined\": \"2023-03-06T23:33:57.501437Z\"\n    }\n]"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "GET - API Root",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{AUTHORIZATION}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/e-commerce/api/",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"e-commerce",
+										"api",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GET - API Root",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token 2c9dc08814ad3354bcd924a1ca70edef4032efc5",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{URL}}/e-commerce/api/",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"e-commerce",
+												"api",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"modelviewset/users\": \"http://localhost:8000/e-commerce/api/modelviewset/users/\",\n    \"modelviewset/filtering-backend/users\": \"http://localhost:8000/e-commerce/api/modelviewset/filtering-backend/users/\",\n    \"viewset/users\": \"http://localhost:8000/e-commerce/api/viewset/users/\",\n    \"genericviewset/users\": \"http://localhost:8000/e-commerce/api/genericviewset/users/\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
